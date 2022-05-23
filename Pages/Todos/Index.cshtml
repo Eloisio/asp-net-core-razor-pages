@@ -28,9 +28,18 @@
                         <td>@todo.Date.ToString("dd/MM/yyyy")</td>
                         <td>@todo.IsCompleted</td>
                         <td>
-                            <a class="btn btn-success">Concluir</a>
-                            <a asp-page="Edit" asp-route-id="@todo.Id" class="btn btn-warning">Editar</a>
-                            <a asp-page-handler="Delete" asp-route-id="@todo.Id" class="btn btn-danger">Excluir</a>
+                            @if (!todo.IsCompleted) {
+                                <a asp-page-handler="ToComplete" asp-route-id="@todo.Id" class="btn btn-success">Concluir</a>
+                                <a asp-page="Edit" asp-route-id="@todo.Id" class="btn btn-warning">Editar</a>
+                            }
+                            <a
+                                asp-page-handler="Delete"
+                                asp-route-id="@todo.Id"
+                                class="btn btn-danger"
+                                onclick="return confirm('Tem certeza que deseja excluir a tarefa?')"
+                            >
+                                Excluir
+                            </a>
                         </td>
                     </tr>
                 }

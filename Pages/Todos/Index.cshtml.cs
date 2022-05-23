@@ -33,4 +33,16 @@ public class IndexModel : PageModel
         _context.SaveChanges();
         return RedirectToPage();
     }
+
+    public IActionResult OnGetToComplete(int id)
+    {
+        var todo = _context.Todos.Find(id);
+        if (todo is null)
+        {
+            return NotFound();
+        }
+        todo.IsCompleted = true;
+        _context.SaveChanges();
+        return RedirectToPage();
+    }
 }
