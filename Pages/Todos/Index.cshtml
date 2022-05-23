@@ -29,7 +29,7 @@
                         <td>@todo.IsCompleted</td>
                         <td>
                             <a class="btn btn-success">Concluir</a>
-                            <a class="btn btn-warning">Editar</a>
+                            <a asp-page="Edit" asp-route-id="@todo.Id" class="btn btn-warning">Editar</a>
                             <a class="btn btn-danger">Excluir</a>
                         </td>
                     </tr>
