@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TWTodoList.Data;
 using TWTodoList.Models;
@@ -19,5 +20,17 @@ public class IndexModel : PageModel
     {
         ViewData["Title"] = "Listagem de Tarefas";
         Todos = _context.Todos.OrderBy(x => x.Date).ToList();
+    }
+
+    public IActionResult OnGetDelete(int id)
+    {
+        var todo = _context.Todos.Find(id);
+        if (todo is null)
+        {
+            return NotFound();
+        }
+        _context.Remove(todo);
+        _context.SaveChanges();
+        return RedirectToPage();
     }
 }
